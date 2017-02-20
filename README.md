@@ -1,2 +1,3 @@
-# SnakeGame
-Simple Snake game in Javascript
+### SnakeGame
+
+To Play game visit - www.test.com
