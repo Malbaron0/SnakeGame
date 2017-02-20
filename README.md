@@ -1,3 +1,3 @@
 ### SnakeGame
 
-To Play game visit - www.test.com
+To Play game visit - http://malbaron.com/SnakeGame/
