@@ -15,6 +15,8 @@ $(document).ready(function() {
       var food;
       var score;
       var gameInterval;
+      var fps = 2800/60;
+
       //Make snake array
       function createSnakeArray() {
             var snakeLength = 5;
@@ -34,9 +36,12 @@ $(document).ready(function() {
             createSnakeArray();
             generateFood();
             score = 0;
-
-            clearInterval(gameInterval); //reset interval
-            gameInterval = setInterval(paintSnakeArray, 60);
+            window.requestAnimationFrame(paintSnakeArray)
+            
+            //clearInterval(gameInterval); //reset interval
+            //gameInterval = setInterval(paintSnakeArray, 60);
+          
+            
 
       }
 
@@ -61,6 +66,7 @@ $(document).ready(function() {
             ctx.strokeStyle = "black";
             ctx.strokeRect(0, 0, canvasWidth, canvasHeight);
 
+
             //get head of snake
             var headx = snake[0].x
             var heady = snake[0].y
@@ -80,7 +86,8 @@ $(document).ready(function() {
              */
             if (headx == canvasWidth / cellWidth || heady == canvasHeight / cellWidth || headx == -1 || heady == -1 || check_collision(headx, heady)) {
                   startGame.style.display = 'initial'; //show button
-                  clearInterval(gameInterval); //stop the loop and return
+                  //clearInterval(gameInterval); //stop the loop and return
+                  clearTimeout(gameInterval);
                   return;
             }
 
@@ -113,6 +120,12 @@ $(document).ready(function() {
 
             //show score by using filltext
             ctx.fillText("Score: " + score, 10, canvasHeight - 10);
+
+            gameInterval = setTimeout(function(){
+                  window.requestAnimationFrame(paintSnakeArray)
+
+            }, fps);
+
       }
 
 
@@ -128,7 +141,7 @@ $(document).ready(function() {
       }
 
       document.addEventListener('keydown', function(e) {
-            console.log(e);
+            
             if (e.keyCode == 37 && direction != "right")
                   direction = "left";
 
